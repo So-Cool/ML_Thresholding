@@ -1,0 +1,21 @@
+# Reading files
+*.pdf
+
+# Experiment files
+exp/*
+
+# Report files
+report/*.old
+report/*.toc
+report/*.pdf
+report/*.out
+report/*.log
+report/*.aux
+
+# Synopsis files
+synopsis/*.old
+synopsis/*.toc
+synopsis/*.pdf
+synopsis/*.out
+synopsis/*.log
+synopsis/*.aux
