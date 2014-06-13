@@ -48,11 +48,50 @@
 \end{@twocolumnfalse}
 ]
 
-\section*{\texttt{Part 1}}
+\section*{\texttt{Review}}
 \lipsum[1]
 
-\section*{\texttt{Part 2}}
-\lipsum[1]
+\section*{\texttt{Data driven thresholding}}
+\begin{enumerate}
+\item MetaLabeler---Regression from the feature vector to the number of labels per instance.
+	\begin{itemize} % 05670068.pdf
+	\item Original input space.
+	\item Score vectors.
+	\item Sorted score vectors.
+	\end{itemize}
+
+	or:
+
+	\begin{itemize} % 05670068.pdf
+	\item Regression.
+	\item Multi class classification.
+	\end{itemize}
+
+\item Artificial label with pairwise comparisons---PCC, EPCC, etc.
+\item Artificial label to extract thresholding number.
+\item Score per label.
+\item Threshold prediction---based on $t(x)$ minimizing:
+	$$
+	| \lambda_j \in Y : s_j(x) \leq t(x) | + | \lambda_j \in \Delta \text{\textbackslash{}} Y : s_j(x) \geq t(x) |
+	$$
+\end{enumerate}
+
+Methods:
+\begin{enumerate}
+\item Rankings:
+	\begin{itemize}
+	\item Multi-class, multi-label perceptron.
+	\item Ranking by pairwise comparison.
+	\end{itemize}
+\item Scores:
+	\begin{itemize}
+	\item Random k-Labelsets (RAkEL)---(Label power-set).
+	\item Ensembles of pruned set---(Label power-set).
+	\item Ensembles of classifier chains---(Pruned sets---extension of Label power-set reducing cardinality).
+	\end{itemize}
+\end{enumerate}
+
+\section*{\texttt{Empirical comparison}}
 
 % \begin{figure}[htbp]
 % \centering
