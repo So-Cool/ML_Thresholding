@@ -1,6 +1,3 @@
-% Report --- ks1591
-% include a brief discussion about how the limitation of leaf instances affects the performance of the decision tree algorithm.
-
 \documentclass[12pt,a4paper,twocolumn]{article}
 \usepackage{times} % times font
 \usepackage{mathptmx} % times font in maths
@@ -49,7 +46,8 @@
 ]
 
 \section*{\texttt{Review}}
-\lipsum[1]
+This work will cover instance-wise thresholding on multi-label ranking. We are going to evaluate performance of such task measured on: \emph{yeast}, \emph{emotions}, \emph{scene} and \emph{reuters} datasets. To train the classifier and rank corresponding test instances we will use: \emph{MEKA}, \emph{Mulan} and independent implementation of \emph{Probabilistic Classifiers Chains}.\\
+As evaluation measures we plan to employ: \emph{recall}, \emph{precision}, \emph{$F_\beta$}, \emph{accuracy}, and \emph{hamming loss}.\\
 
 \section*{\texttt{Data driven thresholding}}
 \begin{enumerate}
@@ -92,6 +90,7 @@ Methods:
 \end{enumerate}
 
 \section*{\texttt{Empirical comparison}}
+Finally we aim to ``compare and contrast'' acquired results. Our goal is also to indicate winning thresholding algorithm if possible and discover any dependencies between .
 
 % \begin{figure}[htbp]
 % \centering
