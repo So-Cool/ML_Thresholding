@@ -46,12 +46,14 @@
 ]
 
 \section*{\texttt{Review}}
-This work will cover instance-wise thresholding on multi-label ranking. We are going to evaluate performance of such task measured on: \emph{yeast}, \emph{emotions}, \emph{scene} and \emph{reuters} datasets. To train the classifier and rank corresponding test instances we will use: \emph{MEKA}, \emph{Mulan} and independent implementation of \emph{Probabilistic Classifiers Chains}.\\
-As evaluation measures we plan to employ: \emph{recall}, \emph{precision}, \emph{$F_\beta$}, \emph{accuracy}, and \emph{hamming loss}.\\
+This work will cover instance-wise thresholding on multi-label ranking. To be more precise, we will examine choosing a threshold based on particular data instance on ordered, according to their relevance, list of labels.\\
+We are going to evaluate performance of such task measured on: \emph{yeast}, \emph{emotions}, \emph{scene} and \emph{reuters} datasets.\\
+To train the classifier and rank corresponding test instances we will use: \emph{MEKA}, \emph{Mulan} and independent implementation of \emph{Probabilistic Classifiers Chains}.\\
+As evaluation measures we plan to employ example based measures: \emph{recall}, \emph{precision}, \emph{$F_\beta$}, \emph{accuracy}, and \emph{hamming loss}; label based measures: \emph{macro-averaging} and \emph{micro-averaging}; ranking measures: \emph{one-error}, \emph{coverage}, \emph{ranking loss} and \emph{average precision}; finally we will also use \emph{hierarchical-loss}.\\
 
 \section*{\texttt{Multi-label ranking}}
 Multi-label ranking is used to order the labels according to their relevance given particular instance. Then the thresholding algorithm is applied to allow selecting relevant number of labels per instance.\\
-For our experiment we will use the following ranking approaches:
+For our experiment we will use the following ranking and scoring approaches:
 \begin{enumerate}
 \item Rankings:
 	\begin{itemize}
@@ -60,12 +62,11 @@ For our experiment we will use the following ranking approaches:
 	\end{itemize}
 \item Scores:
 	\begin{itemize}
-	\item Random k-Labelsets (RAkEL)---(Label power-set).
-	\item Ensembles of pruned set---(Label power-set).
-	\item Ensembles of classifier chains---(Pruned sets---extension of Label power-set reducing cardinality).
+	\item Random k-Labelsets a.k.a.\ RAkEL---Label power-set.
+	\item Ensembles of pruned set---Label power-set.
+	\item Ensembles of classifier chains---Pruned sets i.e.\ extension of Label power-set reducing cardinality.
 	\end{itemize}
 \end{enumerate}
-
 
 \section*{\texttt{Data driven thresholding}}
 \begin{enumerate}
