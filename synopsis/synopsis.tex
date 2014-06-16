@@ -1,7 +1,7 @@
 \documentclass[12pt,a4paper,twocolumn]{article}
 \usepackage{times} % times font
 \usepackage{mathptmx} % times font in maths
-\usepackage[top=0.7in, bottom=0.7in, left=0.7in, right=0.7in]{geometry}
+\usepackage[top=0.65in, bottom=0.65in, left=0.65in, right=0.65in]{geometry}
 \usepackage{multirow} %in tables
 \usepackage{caption} % in tables
 \pagenumbering{gobble}
@@ -15,7 +15,7 @@
 % \usepackage{subfigure}
 % \usepackage{indentfirst} % indent frst paragraph of section
 % \usepackage[usenames,dvipsnames]{color}
-% \newcommand{\ts}{\textsuperscript}
+\newcommand{\ts}{\textsuperscript}
 
 \begin{document}
 
@@ -37,8 +37,7 @@
 	\begin{minipage}{ 0.44\textwidth }
 		\begin{flushright}
 			{\textit{Supervisors:}\\
-			Peter \textbf{Flach}\\
-			Meelis \textbf{Kull}\\[0.3cm]}
+			Peter \textbf{Flach}, Meelis \textbf{Kull}\\[0.3cm]}
 		\end{flushright}
 	\end{minipage}
 \end{center}
@@ -47,9 +46,9 @@
 
 \section*{\texttt{Review}}
 This work will cover instance-wise thresholding on multi-label ranking. To be more precise, we will examine choosing a threshold based on particular data instance on ordered, according to their relevance, list of labels.\\
-We are going to evaluate performance of such task measured on: \emph{yeast}, \emph{emotions}, \emph{scene} and \emph{reuters} datasets.\\
+We are going to evaluate performance of such task measured on: \emph{yeast}, \emph{emotions}, \emph{scene} and \emph{delicious} or \emph{reuters} datasets.\\
 To train the classifier and rank corresponding test instances we will use: \emph{MEKA}, \emph{Mulan} and independent implementation of \emph{Probabilistic Classifiers Chains}.\\
-As evaluation measures we plan to employ example based measures: \emph{delicious/recall}, \emph{precision}, \emph{$F_\beta$}, \emph{accuracy}, and \emph{hamming loss}; label based measures: \emph{macro-averaging} and \emph{micro-averaging}; ranking measures: \emph{one-error}, \emph{coverage}, \emph{ranking loss} and \emph{average precision}; finally we will also use \emph{hierarchical-loss}.\\
+As evaluation measures we plan to employ example based measures: \emph{recall}, \emph{precision}, \emph{$F_\beta$}, \emph{accuracy}, and \emph{hamming loss}; label based measures: \emph{macro-averaging} and \emph{micro-averaging}; ranking measures: \emph{one-error}, \emph{coverage}, \emph{ranking loss} and \emph{average precision}; finally we will also use \emph{hierarchical-loss}.\\
 
 \section*{\texttt{Multi-label ranking}}
 Multi-label ranking is used to order the labels according to their relevance given particular instance. Then the thresholding algorithm is applied to allow selecting relevant number of labels per instance.\\
@@ -57,36 +56,39 @@ For our experiment we will use the following ranking and scoring approaches:
 \begin{enumerate}
 \item Rankings:
 	\begin{itemize}
-	\item Multi-class, multi-label perceptron.
-	\item Ranking by pairwise comparison.
+	\item Multi-label perceptron. %*
+	\item Ranking by pairwise comparison. %*
+	\item Calibrated label ranking. %*
+	\item Ad- aBoost.MR. %*
 	\end{itemize}
 \item Scores:
 	\begin{itemize}
-	\item Random k-Labelsets a.k.a.\ RAkEL---Label power-set.
-	\item Ensembles of pruned set---Label power-set.
-	\item Ensembles of classifier chains---Pruned sets i.e.\ extension of Label power-set reducing cardinality.
+	\item Random k-Labelsets a.k.a.\ RAkEL---label power-set. %*
+	\item Ensembles of pruned set---label power-set.
+	\item Ensembles of classifier chains---pruned sets i.e.\ extension of label power-set reducing cardinality.
 	\end{itemize}
 \end{enumerate}
 
+For the approaches which based on binary or multi-class solutions we aim to test them with: \emph{k-NN}, \emph{SVM} and \emph{decision trees}.
+
 \section*{\texttt{Data driven thresholding}}
+We aim at applying the following data dependent thresholding methods:
 \begin{enumerate}
-\item MetaLabeler---Regression from the feature vector to the number of labels per instance.
+\item MetaLabeler---regression from the feature vector to the number of labels per instance based on:
 	\begin{itemize} % 05670068.pdf
 	\item Original input space.
 	\item Score vectors.
 	\item Sorted score vectors.
 	\end{itemize}
-
-	or:
-
+	and:
 	\begin{itemize} % 05670068.pdf
 	\item Regression.
 	\item Multi class classification.
 	\end{itemize}
 
-\item Artificial label with pairwise comparisons---PCC, EPCC, etc.
-\item Artificial label to extract thresholding number.
-\item Score per label.
+\item Artificial label for pairwise comparisons---PCC, EPCC, etc.
+\item Artificial label to extract threshold value.
+\item Score per label\ts{*}.
 \item Threshold prediction---based on $t(x)$ minimizing:
 	$$
 	| \lambda_j \in Y : s_j(x) \leq t(x) | + | \lambda_j \in \Delta \text{\textbackslash{}} Y : s_j(x) \geq t(x) |
