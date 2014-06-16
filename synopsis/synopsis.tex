@@ -49,7 +49,7 @@
 This work will cover instance-wise thresholding on multi-label ranking. To be more precise, we will examine choosing a threshold based on particular data instance on ordered, according to their relevance, list of labels.\\
 We are going to evaluate performance of such task measured on: \emph{yeast}, \emph{emotions}, \emph{scene} and \emph{reuters} datasets.\\
 To train the classifier and rank corresponding test instances we will use: \emph{MEKA}, \emph{Mulan} and independent implementation of \emph{Probabilistic Classifiers Chains}.\\
-As evaluation measures we plan to employ example based measures: \emph{recall}, \emph{precision}, \emph{$F_\beta$}, \emph{accuracy}, and \emph{hamming loss}; label based measures: \emph{macro-averaging} and \emph{micro-averaging}; ranking measures: \emph{one-error}, \emph{coverage}, \emph{ranking loss} and \emph{average precision}; finally we will also use \emph{hierarchical-loss}.\\
+As evaluation measures we plan to employ example based measures: \emph{delicious/recall}, \emph{precision}, \emph{$F_\beta$}, \emph{accuracy}, and \emph{hamming loss}; label based measures: \emph{macro-averaging} and \emph{micro-averaging}; ranking measures: \emph{one-error}, \emph{coverage}, \emph{ranking loss} and \emph{average precision}; finally we will also use \emph{hierarchical-loss}.\\
 
 \section*{\texttt{Multi-label ranking}}
 Multi-label ranking is used to order the labels according to their relevance given particular instance. Then the thresholding algorithm is applied to allow selecting relevant number of labels per instance.\\
@@ -94,7 +94,7 @@ For our experiment we will use the following ranking and scoring approaches:
 \end{enumerate}
 
 \section*{\texttt{Empirical comparison}}
-Finally we aim to ``compare and contrast'' acquired results. Our goal is also to indicate winning thresholding algorithm if possible and discover any dependencies that may arise between type of dataset, manner of fixing the threshold, and particular method of ranking.
+Finally we aim to ``compare and contrast'' acquired results according to aforementioned criteria. Our goal is also to indicate winning thresholding algorithm if possible and discover any dependencies that may arise between type of dataset, manner of fixing the threshold, and ranking approach.
 
 % \begin{figure}[htbp]
 % \centering
