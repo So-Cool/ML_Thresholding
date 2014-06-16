@@ -24,7 +24,7 @@
 \begin{center}
 	\begin{large}
 	{\HRule \\[0.2cm]}
-	\textsc{Instance-wise thresholding methods in multi-label classification}
+	\textsc{Instance-wise thresholding methods for multi-label classification}
 	{\HRule \\[0.3cm]}
 	\end{large}
 
@@ -45,7 +45,7 @@
 ]
 
 \section*{\texttt{Review}}
-This work will cover instance-wise thresholding on multi-label ranking. To be more precise, we will examine choosing a threshold based on particular data instance on ordered, according to their relevance, list of labels.\\
+This work will cover instance-wise thresholding on multi-label ranking and scoring. To be more precise, we will examine choosing a threshold based on particular data instance features on ordered(according to their relevance) list of labels.\\
 We are going to evaluate performance of such task measured on: \emph{yeast}, \emph{emotions}, \emph{scene} and \emph{delicious} or \emph{reuters} datasets.\\
 To train the classifier and rank corresponding test instances we will use: \emph{MEKA}, \emph{Mulan} and independent implementation of \emph{Probabilistic Classifiers Chains}.\\
 As evaluation measures we plan to employ example based measures: \emph{recall}, \emph{precision}, \emph{$F_\beta$}, \emph{accuracy}, and \emph{hamming loss}; label based measures: \emph{macro-averaging} and \emph{micro-averaging}; ranking measures: \emph{one-error}, \emph{coverage}, \emph{ranking loss} and \emph{average precision}; finally we will also use \emph{hierarchical-loss}.\\
@@ -59,17 +59,17 @@ For our experiment we will use the following ranking and scoring approaches:
 	\item Multi-label perceptron. %*
 	\item Ranking by pairwise comparison. %*
 	\item Calibrated label ranking. %*
-	\item Ad- aBoost.MR. %*
+	\item Ad-aBoost.MR. %*
 	\end{itemize}
 \item Scores:
 	\begin{itemize}
 	\item Random k-Labelsets a.k.a.\ RAkEL---label power-set. %*
 	\item Ensembles of pruned set---label power-set.
-	\item Ensembles of classifier chains---pruned sets i.e.\ extension of label power-set reducing cardinality.
+	\item Ensembles of classifier chains---pruned sets i.e.\ extension of label power-set which reduces cardinality.
 	\end{itemize}
 \end{enumerate}
 
-For the approaches which based on binary or multi-class solutions we aim to test them with: \emph{k-NN}, \emph{SVM} and \emph{decision trees}.
+For the approaches based on binary or multi-class solutions we aim to test them with: \emph{k-NN}, \emph{SVM} and \emph{decision trees}.
 
 \section*{\texttt{Data driven thresholding}}
 We aim at applying the following data dependent thresholding methods:
@@ -83,12 +83,12 @@ We aim at applying the following data dependent thresholding methods:
 	and:
 	\begin{itemize} % 05670068.pdf
 	\item Regression.
-	\item Multi class classification.
+	\item Multi-class classification.
 	\end{itemize}
 
 \item Artificial label for pairwise comparisons---PCC, EPCC, etc.
 \item Artificial label to extract threshold value.
-\item Score per label\ts{*}.
+% \item Score per label\ts{*}. % assume we give the score of the label corresponding to relative frequency of this label according to data point and then cut at given fixed threshold---maybe
 \item Threshold prediction---based on $t(x)$ minimizing:
 	$$
 	| \lambda_j \in Y : s_j(x) \leq t(x) | + | \lambda_j \in \Delta \text{\textbackslash{}} Y : s_j(x) \geq t(x) |
