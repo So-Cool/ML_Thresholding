@@ -46,9 +46,9 @@
 
 \section*{\texttt{Review}}
 This work will cover instance-wise thresholding on multi-label ranking and scoring. To be more precise, we will examine choosing a threshold based on particular data instance features on ordered(according to their relevance) list of labels.\\
-We are going to evaluate performance of such task measured on: \emph{yeast}, \emph{emotions}, \emph{scene} and \emph{delicious} or \emph{reuters} datasets.\\
+We are going to evaluate performance of such task measured on high cardinality \emph{delicious}($19.020$) and average cardinality \emph{yeast}($4.237$), \emph{mediamill}($4.376$) datasets.\\ % Additionally we will draw the histogram of of labels per instance to visualise distributions of labels.
 To train the classifier and rank corresponding test instances we will use: \emph{MEKA}, \emph{Mulan} and independent implementation of \emph{Probabilistic Classifiers Chains}.\\
-As evaluation measures we plan to employ example based measures: \emph{recall}, \emph{precision}, \emph{$F_\beta$}, \emph{accuracy}, and \emph{hamming loss}; label based measures: \emph{macro-averaging} and \emph{micro-averaging}; ranking measures: \emph{one-error}, \emph{coverage}, \emph{ranking loss} and \emph{average precision}; finally we will also use \emph{hierarchical-loss}.\\
+As evaluation measures we plan to employ example based measures: \emph{recall}, \emph{precision}, \emph{$F_\beta$}, \emph{accuracy}, and \emph{hamming loss}; and label based measures: \emph{macro-averaging} and \emph{micro-averaging}.%; ranking measures: \emph{one-error}, \emph{coverage}, \emph{ranking loss} and \emph{average precision}; finally we will also use \emph{hierarchical-loss}.\\
 
 \section*{\texttt{Multi-label ranking}}
 Multi-label ranking is used to order the labels according to their relevance given particular instance. Then the thresholding algorithm is applied to allow selecting relevant number of labels per instance.\\
@@ -56,16 +56,17 @@ For our experiment we will use the following ranking and scoring approaches:
 \begin{enumerate}
 \item Rankings:
 	\begin{itemize}
-	\item Multi-label perceptron. %*
+	\item Multi-label perceptron. %* ?????
 	\item Ranking by pairwise comparison. %*
-	\item Calibrated label ranking. %*
+	% \item Calibrated label ranking. %*
 	\item Ad-aBoost.MR. %*
 	\end{itemize}
 \item Scores:
 	\begin{itemize}
 	\item Random k-Labelsets a.k.a.\ RAkEL---label power-set. %*
-	\item Ensembles of pruned set---label power-set.
-	\item Ensembles of classifier chains---pruned sets i.e.\ extension of label power-set which reduces cardinality.
+	% \item Ensembles of pruned set---label power-set.
+	\item Ensembles of classifier chains---pruned sets i.e.\ extension of label power-set which reduces cardinality. % ?????
+	\item Some probabilistic classifiers.???
 	\end{itemize}
 \end{enumerate}
 
@@ -97,6 +98,11 @@ We aim at applying the following data dependent thresholding methods:
 
 \section*{\texttt{Empirical comparison}}
 Finally we aim to ``compare and contrast'' acquired results according to aforementioned criteria. Our goal is also to indicate winning thresholding algorithm if possible and discover any dependencies that may arise between type of dataset, manner of fixing the threshold, and ranking approach.
+
+\section*{\texttt{Goal}}
+We aim at comparing 2\ts{nd} and 3\ts{rd} thresholding method against each other as they are very simmilar and may vary only a little.\\
+We will also compare all fancy thresholding methods against one simple global threshold(like 0.5).\\
+
 
 % \begin{figure}[htbp]
 % \centering
