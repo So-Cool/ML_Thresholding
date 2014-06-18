@@ -46,13 +46,17 @@
 
 \section*{\texttt{Review}}
 This work will cover instance-wise thresholding on multi-label ranking and scoring. To be more precise, we will examine choosing a threshold based on particular data instance features on ordered(according to their relevance) list of labels.\\
-We are going to evaluate performance of such task measured on high cardinality \emph{delicious}($19.020$) and average cardinality \emph{yeast}($4.237$), \emph{mediamill}($4.376$) datasets.\\ % Additionally we will draw the histogram of of labels per instance to visualise distributions of labels.
-To train the classifier and rank corresponding test instances we will use: \emph{MEKA}, \emph{Mulan} and independent implementation of \emph{Probabilistic Classifiers Chains}.\\
+We are going to evaluate performance of such task measured on high cardinality: \emph{delicious}($19.020$) and average cardinality: \emph{yeast}($4.237$) and \emph{mediamill}($4.376$) datasets.\\ % Additionally we will draw the histogram of of labels per instance to visualise distributions of labels.
+To train the classifiers and rank corresponding test instances we will use: \emph{MEKA}, \emph{Mulan} and independent implementation of \emph{Probabilistic Classifiers Chains}.\\
 As evaluation measures we plan to employ example based measures: \emph{recall}, \emph{precision}, \emph{$F_\beta$}, \emph{accuracy}, and \emph{hamming loss}; and label based measures: \emph{macro-averaging} and \emph{micro-averaging}.%; ranking measures: \emph{one-error}, \emph{coverage}, \emph{ranking loss} and \emph{average precision}; finally we will also use \emph{hierarchical-loss}.\\
 
 \section*{\texttt{Multi-label ranking}}
-Multi-label ranking is used to order the labels according to their relevance given particular instance. Then the thresholding algorithm is applied to allow selecting relevant number of labels per instance.\\
+Multi-label ranking is used to order the labels according to their relevance given particular instance. On the other, hand scoring algorithms output score per label for each instance thus they facilitate labels ordering.\\
+Next step is to apply thresholding algorithm to select relevant number of labels per instance.\\
 For our experiment we will use the following ranking and scoring approaches:
+
+explain each of them!\\
+
 \begin{enumerate}
 \item Rankings:
 	\begin{itemize}
@@ -70,12 +74,16 @@ For our experiment we will use the following ranking and scoring approaches:
 	\end{itemize}
 \end{enumerate}
 
-For the approaches based on binary or multi-class solutions we aim to test them with: \emph{k-NN}, \emph{SVM} and \emph{decision trees}.
+For the approaches based on binary or multi-class solutions we aim to test them with: \emph{k-NN}, \emph{SVM} and \emph{decision trees} algorithms.
 
 \section*{\texttt{Data driven thresholding}}
 We aim at applying the following data dependent thresholding methods:
+
+explain each and every!\\
+
+
 \begin{enumerate}
-\item MetaLabeler---regression from the feature vector to the number of labels per instance based on:
+\item MetaLabeler---mapping from the feature vector to the number of labels per instance based on:
 	\begin{itemize} % 05670068.pdf
 	\item Original input space.
 	\item Score vectors.
@@ -88,7 +96,7 @@ We aim at applying the following data dependent thresholding methods:
 	\end{itemize}
 
 \item Artificial label for pairwise comparisons---PCC, EPCC, etc.
-\item Artificial label to extract threshold value.
+\item Artificial label for threshold extraction.
 % \item Score per label\ts{*}. % assume we give the score of the label corresponding to relative frequency of this label according to data point and then cut at given fixed threshold---maybe
 \item Threshold prediction---based on $t(x)$ minimizing:
 	$$
@@ -96,16 +104,14 @@ We aim at applying the following data dependent thresholding methods:
 	$$
 \end{enumerate}
 
-\emph{Original input space} was discovered to be optimal[ref.] therefore in our experiment we will only use this one out of three listed.\\
+Out of the top three MetaLabeler approaches the \emph{original input space} was discovered to be optimal. We will use this fact to restrict our experiment pool, therefore we will neither test \emph{score vectors} nor \emph{sorted score vectors}.\\
 
-\section*{\texttt{Empirical comparison}}
-Finally we aim to ``compare and contrast'' acquired results according to aforementioned criteria. Our goal is also to indicate winning thresholding algorithm if possible and discover any dependencies that may arise between type of dataset, manner of fixing the threshold, and ranking approach.
+\section*{\texttt{Deliverables}}
+Finally, we aim to ``compare and contrast'' acquired results according to aforementioned criteria. Our goal is to indicate winning data driven thresholding algorithm if possible and discover any dependencies that may arise between characteristic of a dataset, threshold approach, and chosen classification algorithm.\\
 
-\section*{\texttt{Goal}}
-The main purpose of this experiment is to see whether fancy data dependent threshold selection gives any better result than simple global threshold selection.\\
-We aim at comparing 2\ts{nd} and 3\ts{rd} thresholding method against each other as they are very similar and may vary only a little. The purpose is to see whether magically introduced label is really necessary in ranking.\\
-We will also compare all fancy thresholding methods against one simple global threshold(like 0.5).\\
-We also aim at examining behavior of thresholding based on characteristic of the dataset.\\
+The main purpose of this experiment is to examine whether advanced, data dependent threshold selection outperforms simple, global thresholding---basic benchmark will be produced. Moreover, study will be done to check whether increase in computational complexity will significantly improve labeling and in what cases advanced approach is worth the slowdown.\\
+
+We also aim at comparing 2\ts{nd} and 3\ts{rd} thresholding method against each other as they are very similar and their results may be hard to distinguish on the general test. The purpose of this subtask is to see whether introduced artificial label is necessary or it is enough to treat it as a truncation point.\\
 
 
 % \begin{figure}[htbp]
