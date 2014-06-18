@@ -40,18 +40,21 @@
 			Peter \textbf{Flach}, Meelis \textbf{Kull}\\[0.3cm]}
 		\end{flushright}
 	\end{minipage}
+
+	~\\ \textbf{Organise experiments to create sort of ToDo list!}
+
 \end{center}
 \end{@twocolumnfalse}
 ]
 
 \section*{\texttt{Review}}
 This work will cover instance-wise thresholding on multi-label ranking and scoring. To be more precise, we will examine choosing a threshold based on particular data instance features on ordered(according to their relevance) list of labels.\\
-We are going to evaluate performance of such task measured on high cardinality: \emph{delicious}($19.020$) and average cardinality: \emph{yeast}($4.237$) and \emph{mediamill}($4.376$) datasets.\\ % Additionally we will draw the histogram of of labels per instance to visualise distributions of labels.
-To train the classifiers and rank corresponding test instances we will use: \emph{MEKA}, \emph{Mulan} and independent implementation of \emph{Probabilistic Classifiers Chains}.\\
-As evaluation measures we plan to employ example based measures: \emph{recall}, \emph{precision}, \emph{$F_\beta$}, \emph{accuracy}, and \emph{hamming loss}; and label based measures: \emph{macro-averaging} and \emph{micro-averaging}.%; ranking measures: \emph{one-error}, \emph{coverage}, \emph{ranking loss} and \emph{average precision}; finally we will also use \emph{hierarchical-loss}.\\
+We are going to evaluate performance of such task measured on high cardinality: \emph{delicious}($19.020$), \emph{CAL500}($26.044$), and average cardinality: \emph{yeast}($4.237$) and \emph{mediamill}($4.376$), \emph{enron}($3.378$) datasets.\\ % Additionally we will draw the histogram of of labels per instance to visualise distributions of labels.
+To train the classifiers and rank corresponding test instances we will use: \emph{MEKA} and \emph{Mulan}.\\% and independent implementation of \emph{Probabilistic Classifiers Chains}.\\
+As evaluation measures we plan to employ example based measures: \emph{recall}, \emph{precision}, \emph{$F_\beta$}, \emph{accuracy}, \emph{0--1 loss}(i.e.\ subset accuracy) and \emph{hamming loss}; and label based measures: \emph{macro-averaging} and \emph{micro-averaging}.%; ranking measures: \emph{one-error}, \emph{coverage}, \emph{ranking loss} and \emph{average precision}; finally we will also use \emph{hierarchical-loss}.\\
 
 \section*{\texttt{Multi-label ranking}}
-Multi-label ranking is used to order the labels according to their relevance given particular instance. On the other, hand scoring algorithms output score per label for each instance thus they facilitate labels ordering.\\
+Multi-label ranking is used to order the labels according to their relevance given particular instance. On the other hand, scoring algorithms output score per label for each instance thus they facilitate labels ordering.\\
 Next step is to apply thresholding algorithm to select relevant number of labels per instance.\\
 For our experiment we will use the following ranking and scoring approaches:
 
@@ -61,7 +64,7 @@ For our experiment we will use the following ranking and scoring approaches:
 	\item Multi-label perceptron. This approach produces one perceptron per label with weight updated in such a way that each perceptron leads to perfect labels ranking. %* ?????
 	\item Ranking by pairwise comparison. This model learns pairwise binary models(for all possible pairs). Scores are obtained by accumulating votes for each label. %*
 	% \item Calibrated label ranking. %*
-	\item Ad-aBoost.MR. Adaptation of~Ad-aBoost algorithm for multi-label datasets which tries to find hypothesis which places correct labels at the top of the ranking. %*
+	\item AdaBoost.MR---adaptation of AdaBoost algorithm for multi-label datasets which tries to find hypothesis which places correct labels at the top of the ranking. %*
 	\end{itemize}
 \item Scores:
 	\begin{itemize}
@@ -88,9 +91,9 @@ We aim at applying the following data dependent thresholding methods:
 	$$
 	\phi(x_i) = [ f_1(x_i), f_2(x_i), ...\ , f_K(x_i) ]
 	$$
-	\item Sorted score vectors $\hat{\phi}(x_i)$(rank based)---$\psi$ is a function that sort the scores.
+	\item Sorted score vectors $\hat{\phi}(x_i)$(rank based).
 	$$
-	\hat{\phi}(x_i) = \psi ( f_1(x_i), f_2(x_i), ...\ , f_K(x_i) )
+	\hat{\phi}(x_i) = \texttt{sort} ( f_1(x_i), f_2(x_i), ...\ , f_K(x_i) )
 	$$
 	\end{itemize}
 
@@ -100,7 +103,7 @@ We aim at applying the following data dependent thresholding methods:
 	\item Multi-class classification. Perform a classification from features vector to the classes represented by number of labels per instance.
 	\end{itemize}
 
-\item Artificial label for pairwise comparisons---PCC, EPCC, etc. It introduces an artificial label with labels applying to the instance being above it and all the rest of labels being below. It uses this label as a threshold.
+\item Artificial label for pairwise comparisons (only for calibrated label ranking) ---PCC, EPCC, etc. It introduces an artificial label with labels applying to the instance being above it and all the rest of labels being below. It uses this label as a threshold.
 \item Artificial label for threshold extraction. Similar as above, but instead of treating the label as a cut point the threshold is acquired by extracting the label counter.% and using it as a threshold.
 % \item Score per label\ts{*}. % assume we give the score of the label corresponding to relative frequency of this label according to data point and then cut at given fixed threshold---maybe
 \item Threshold prediction---based on $t(x)$ minimizing:
@@ -118,6 +121,9 @@ The main purpose of this experiment is to examine whether advanced, data depende
 
 We also aim at comparing 2\ts{nd} and 3\ts{rd} thresholding method against each other as they are very similar and their results may be hard to distinguish on the general test. The purpose of this subtask is to see whether introduced artificial label is necessary or it is enough to treat it as a truncation point.\\
 
+
+\section*{\texttt{References}}
+\textbf{ 3 and 3 in both and one more + referenced to all of them!!!}
 
 % \begin{figure}[htbp]
 % \centering
