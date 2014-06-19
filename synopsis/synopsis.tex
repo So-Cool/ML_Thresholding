@@ -104,16 +104,17 @@ We aim at applying the following data dependent thresholding methods:
 	\item Multi-class classification~\cite{conf/ictai/IoannouSTV10}. Perform a classification from features vector to the classes represented by number of labels per instance.
 	\end{itemize}
 
-\item Artificial label for pairwise comparisons (only for calibrated label ranking) ---PCC, EPCC, etc. It introduces an artificial label with labels applying to the instance being above it and all the rest of labels being below. It uses this label as a threshold.
-\item Artificial label for threshold extraction. Similar as above, but instead of treating the label as a cut point the threshold is acquired by extracting the label counter.% and using it as a threshold.
+\item Artificial label for threshold extraction. Similar as above, but instead of treating the label as a cut point the threshold is acquired by extracting the label counter.?????????% and using it as a threshold.
 % \item Score per label\ts{*}. % assume we give the score of the label corresponding to relative frequency of this label according to data point and then cut at given fixed threshold---maybe
-\item Threshold prediction---based on $t(x)$ minimizing:
+\item Threshold prediction~\cite{Elisseeff01akernel}---based on $t(x)$ minimizing:
 	$$
 	t(x_i) = \text{argmin}_t $$ $$ | \lambda_j \in Y : s_j(x_i) \leq t | + | \lambda_j \in \Delta \text{\textbackslash{}} Y : s_j(x_i) \geq t |
 	$$
 \end{enumerate}
 
 Out of the top three MetaLabeler approaches the \emph{original input space} was discovered to be optimal. We will use this fact to restrict our experiment pool, therefore we will neither test \emph{score vectors} nor \emph{sorted score vectors}.\\
+
+Artificial label for pairwise comparisons~\cite{conf/icml/DembczynskiCH10} (only for calibrated label ranking) ---PCC, EPCC, etc. It introduces an artificial label with labels applying to the instance being above it and all the rest of labels being below. It uses this label as a threshold.?????????
 
 \section*{\texttt{Deliverables}}
 Finally, we aim to ``compare and contrast'' acquired results according to aforementioned criteria. Our goal is to indicate winning data driven thresholding algorithm if possible and discover any dependencies that may arise between characteristic of a dataset, threshold approach, and chosen classification algorithm.\\
