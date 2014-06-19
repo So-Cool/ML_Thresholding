@@ -11,6 +11,8 @@ report/*.pdf
 report/*.out
 report/*.log
 report/*.aux
+report/*.bbl
+report/*.blg
 
 # Synopsis files
 synopsis/*.old
@@ -19,3 +21,5 @@ synopsis/*.pdf
 synopsis/*.out
 synopsis/*.log
 synopsis/*.aux
+synopsis/*.bbl
+synopsis/*.blg
