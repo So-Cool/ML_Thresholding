@@ -52,7 +52,7 @@
 This work will cover instance-wise thresholding on multi-label ranking and scoring. To be more precise, we will examine choosing a threshold based on particular data instance features on ordered(according to their relevance) list of labels.\\
 We are going to evaluate performance of such task measured on high cardinality: \emph{delicious}($19.020$), \emph{CAL500}($26.044$), and average cardinality: \emph{yeast}($4.237$) and \emph{mediamill}($4.376$), \emph{enron}($3.378$) datasets.\\ % Additionally we will draw the histogram of of labels per instance to visualise distributions of labels.
 To train the classifiers and rank corresponding test instances we will use: \emph{MEKA} and \emph{Mulan}.\\% and independent implementation of \emph{Probabilistic Classifiers Chains}.\\
-As evaluation measures\cite{DBLP:reference/dmkdh/TsoumakasKV10} we plan to employ example based measures: \emph{recall}, \emph{precision}, \emph{$F_\beta$}, \emph{accuracy}, \emph{0--1 loss}(i.e.\ subset accuracy) and \emph{hamming loss}; and label based measures: \emph{macro-averaging} and \emph{micro-averaging}.%; ranking measures: \emph{one-error}, \emph{coverage}, \emph{ranking loss} and \emph{average precision}; finally we will also use \emph{hierarchical-loss}.\\
+As evaluation measures~\cite{DBLP:reference/dmkdh/TsoumakasKV10} we plan to employ example based measures: \emph{recall}, \emph{precision}, \emph{$F_\beta$}, \emph{accuracy}, \emph{0--1 loss}(i.e.\ subset accuracy) and \emph{hamming loss}; and label based measures: \emph{macro-averaging} and \emph{micro-averaging}.%; ranking measures: \emph{one-error}, \emph{coverage}, \emph{ranking loss} and \emph{average precision}; finally we will also use \emph{hierarchical-loss}.\\
 
 \section*{\texttt{Multi-label ranking}}
 Multi-label ranking is used to order the labels according to their relevance given particular instance. On the other hand, scoring algorithms output score per label for each instance thus they facilitate labels ordering.\\
@@ -62,7 +62,7 @@ For our experiment we will use the following ranking and scoring approaches:
 \begin{enumerate}
 \item Rankings:
 	\begin{itemize}
-	\item Multi-label perceptron. This approach produces one perceptron per label with weight updated in such a way that each perceptron leads to perfect labels ranking. %* ?????
+	\item Multi-label perceptron~\cite{Crammer03afamily}. This approach produces one perceptron per label with weight updated in such a way that each perceptron leads to perfect labels ranking. %* ?????
 	\item Ranking by pairwise comparison. This model learns pairwise binary models(for all possible pairs). Scores are obtained by accumulating votes for each label. %*
 	% \item Calibrated label ranking. %*
 	\item AdaBoost.MR---adaptation of AdaBoost algorithm for multi-label datasets which tries to find hypothesis which places correct labels at the top of the ranking. %*
