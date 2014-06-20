@@ -52,7 +52,7 @@
 This work will cover instance-wise thresholding on multi-label ranking and scoring. To be more precise, we will examine choosing a threshold based on particular data instance features on ordered(according to their relevance) list of labels.\\
 We are going to evaluate performance of such task measured on high cardinality: \emph{delicious}($19.020$), \emph{CAL500}($26.044$), and average cardinality: \emph{yeast}($4.237$) and \emph{mediamill}($4.376$), \emph{enron}($3.378$) datasets.\\ % Additionally we will draw the histogram of of labels per instance to visualise distributions of labels.
 To train the classifiers and rank corresponding test instances we will use: \emph{MEKA} and \emph{Mulan}.\\% and independent implementation of \emph{Probabilistic Classifiers Chains}.\\
-As evaluation measures~\cite{DBLP:reference/dmkdh/TsoumakasKV10} we plan to employ example based measures such as: \emph{exact match ratio}, \emph{accuracy}, \emph{precision}, \emph{recall}, \emph{$F_1$ measure}, \emph{subset 0--1 loss} and \emph{hamming loss}.
+As evaluation measures~\cite{DBLP:reference/dmkdh/TsoumakasKV10} we plan to employ \emph{micro} and \emph{macro} \emph{averaging} for each of the example based measures: \emph{exact match ratio}, \emph{accuracy}, \emph{precision}, \emph{recall}, \emph{$F_1$ measure}, \emph{subset 0--1 loss} and \emph{hamming loss}.
 
 %; and label based measures: \emph{macro-averaging} and \emph{micro-averaging}.\\
 %; ranking measures: \emph{one-error}, \emph{coverage}, \emph{ranking loss} and \emph{average precision}; finally we will also use \emph{hierarchical-loss}.\\
@@ -112,7 +112,8 @@ We aim at applying the following data dependent thresholding methods:
 	t(x_i) = \text{argmin}_t $$ $$ | \lambda_j \in Y : s_j(x_i) \leq t | + | \lambda_j \in \Delta \text{\textbackslash{}} Y : s_j(x_i) \geq t |
 	$$
 
-\item Artificial label for threshold extraction. This method uses the concept of pseudo-label but instead of treating it as a cut point the threshold is acquired by extracting the label counter (this method can only be used with pairwise ranking approach).% and using it as a threshold.
+\item Artificial label for threshold extraction. This method uses the concept of pseudo-label but instead of treating it as a cut point the threshold is acquired by extracting the label counter.% and using it as a threshold.
+%% all that apply for particular label agains all that does not apply for particular label
 % \item Score per label\ts{*}. % assume we give the score of the label corresponding to relative frequency of this label according to data point and then cut at given fixed threshold---maybe
 
 \item Artificial label for calibrated label ranking~\cite{DBLP:conf/ecml/ParkF07}. This method introduces an artificial label with labels applying to the instance being above it and all the rest of labels being below. It uses this label as a calibration factor and once classification is performed as a threshold (this method can only be used with pairwise ranking approach).
