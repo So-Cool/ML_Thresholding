@@ -18,7 +18,7 @@ public class Engine {
     	MultiLabelInstances dataset = new MultiLabelInstances(args[0], args[1]);
     	
     	// use data-set with 10-folds cross-validation
-    	Learners learn = new Learners(dataset, 10);
+    	Learners learn = new Learners(dataset, 2);
     	learn.evaluate();
     	
     	
