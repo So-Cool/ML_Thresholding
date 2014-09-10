@@ -8,6 +8,9 @@ MultilabelThresholding/bin
 MultilabelThresholding/datasets
 .classpath
 
+# Mac OS X
+.DS_Store
+
 # Report files
 report/*.old
 report/*.toc
