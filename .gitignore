@@ -1,8 +1,12 @@
 # Reading files
 *.pdf
+Papers/*
 
 # Experiment files
-exp/*
+Libs/*
+MultilabelThresholding/bin
+MultilabelThresholding/datasets
+.classpath
 
 # Report files
 report/*.old
