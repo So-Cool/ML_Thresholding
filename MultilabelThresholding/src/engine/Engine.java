@@ -31,17 +31,3 @@ public class Engine {
 	}
 	
 }
-
-//  old weka
-//BufferedReader reader = new BufferedReader( new FileReader(args[0]) );
-//Instances data = new Instances( reader );
-//reader.close();
-//  new weka
-//DataSource source = new DataSource("/some/where/data.arff");
-//Instances data = source.getDataSet();
-
-// setting class attribute
-//data.setClassIndex(data.numAttributes() - 1);
-
-// running classifiers
-//MultiLabelLearner.runClassifier(new TestClassifier(),args);
