@@ -5,6 +5,7 @@ import mulan.data.MultiLabelInstances;
 public class Engine {
 	
 	private static int CVfolds = 2;
+	private static String evaluationMeasure = "Hamming Loss";
 
     public static void main(String[] args) throws Exception {
     	
@@ -20,7 +21,7 @@ public class Engine {
     	
     	// use data-set with *CVfolds*-folds cross-validation
     	Learners learn = new Learners(dataset, CVfolds);
-    	learn.evaluate();
+    	learn.evaluate(evaluationMeasure);
     	
     	// Gather HammingLoss results and print them
     	System.out.println(learn.toString());

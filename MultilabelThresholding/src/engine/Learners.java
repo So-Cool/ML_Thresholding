@@ -29,15 +29,25 @@ public class Learners {
     	this.learner2 = new MLkNN(); 
 	}
 	
-	public void evaluate(){
+	public void evaluate(String type){
 		Evaluator eval = new Evaluator();
 		MultipleEvaluation results;
 		
+		// Evaluation
+		//  RANKING
 		results = eval.crossValidate(learner1, dataset, folds);
-		result1 = results.getMean("Hamming Loss");
+		result1 = results.getMean(type);
 		
 		results = eval.crossValidate(learner2, dataset, folds);
-		result2 = results.getMean("Hamming Loss");
+		result2 = results.getMean(type);
+		
+		//  SCORING
+		// *
+		// *
+		// *
+		
+		// Thresholding
+		
 	}
 	
 	public double[] getHammingLoss(){
@@ -48,7 +58,7 @@ public class Learners {
 	@Override
 	public String toString(){
 		double[] losses = this.getHammingLoss();
-		String contents = "";
+		String contents = "\n";
 		for(int i=0; i<losses.length; ++i){
     		contents += ("Hamming Loss-classifier" + String.valueOf(i) + ": " + losses[i] + "\n");
     	}
