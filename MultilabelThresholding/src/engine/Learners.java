@@ -13,7 +13,10 @@ public class Learners {
 	private MultiLabelInstances dataset;
 	
 	private RAkEL learner1;
+	private double result1;
+	
 	private MLkNN learner2;
+	private double result2;
 	
 	private int folds;
 	
@@ -31,11 +34,16 @@ public class Learners {
 		MultipleEvaluation results;
 		
 		results = eval.crossValidate(learner1, dataset, folds);
-		System.out.println(results);
+//		System.out.println(results);
+		result1 = results.getMean("Hamming Loss");
+		
 		results = eval.crossValidate(learner2, dataset, folds);
-		System.out.println(results);
-		
-		
+		result2 = results.getMean("Hamming Loss");
+	}
+	
+	public double[] getHammingLoss(){
+		double[] res = {result1, result2};
+		return res;
 	}
 	
 }

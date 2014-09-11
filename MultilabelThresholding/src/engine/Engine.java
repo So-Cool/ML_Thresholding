@@ -1,9 +1,10 @@
 package engine;
 
 import mulan.data.MultiLabelInstances;
-// datasets/CAL500/CAL500.arff datasets/CAL500/CAL500.xml
 
 public class Engine {
+	
+	private static int CVfolds = 2;
 
     public static void main(String[] args) throws Exception {
     	
@@ -18,10 +19,13 @@ public class Engine {
     	MultiLabelInstances dataset = new MultiLabelInstances(args[0], args[1]);
     	
     	// use data-set with 10-folds cross-validation
-    	Learners learn = new Learners(dataset, 2);
+    	Learners learn = new Learners(dataset, CVfolds);
     	learn.evaluate();
+    	double[] losses = learn.getHammingLoss();
     	
-    	
+    	for(int i=0; i<losses.length; ++i){
+    		System.out.println("Hamming Loss-classifier" + String.valueOf(i) + ": " + losses[i]);
+    	}
     	
     	
     	
