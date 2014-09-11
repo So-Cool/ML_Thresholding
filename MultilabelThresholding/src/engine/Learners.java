@@ -34,7 +34,6 @@ public class Learners {
 		MultipleEvaluation results;
 		
 		results = eval.crossValidate(learner1, dataset, folds);
-//		System.out.println(results);
 		result1 = results.getMean("Hamming Loss");
 		
 		results = eval.crossValidate(learner2, dataset, folds);
@@ -44,6 +43,16 @@ public class Learners {
 	public double[] getHammingLoss(){
 		double[] res = {result1, result2};
 		return res;
+	}
+	
+	@Override
+	public String toString(){
+		double[] losses = this.getHammingLoss();
+		String contents = "";
+		for(int i=0; i<losses.length; ++i){
+    		contents += ("Hamming Loss-classifier" + String.valueOf(i) + ": " + losses[i] + "\n");
+    	}
+		return contents;
 	}
 	
 }

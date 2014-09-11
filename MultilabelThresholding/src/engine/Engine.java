@@ -18,32 +18,29 @@ public class Engine {
     	System.out.println("Reading dataset...");
     	MultiLabelInstances dataset = new MultiLabelInstances(args[0], args[1]);
     	
-    	// use data-set with 10-folds cross-validation
+    	// use data-set with *CVfolds*-folds cross-validation
     	Learners learn = new Learners(dataset, CVfolds);
     	learn.evaluate();
-    	double[] losses = learn.getHammingLoss();
     	
-    	for(int i=0; i<losses.length; ++i){
-    		System.out.println("Hamming Loss-classifier" + String.valueOf(i) + ": " + losses[i]);
-    	}
+    	// Gather HammingLoss results and print them
+    	System.out.println(learn.toString());
     	
-    	
-    	
-    	//  old weka
-//    	BufferedReader reader = new BufferedReader( new FileReader(args[0]) );
-//    	Instances data = new Instances( reader );
-//    	reader.close();
-    	//  new weka
-//    	DataSource source = new DataSource("/some/where/data.arff");
-//    	Instances data = source.getDataSet();
-    	
-    	// setting class attribute
-//    	data.setClassIndex(data.numAttributes() - 1);
-	 
-    	// running classifiers
-//    	MultiLabelLearner.runClassifier(new TestClassifier(),args);
-    	
+    	// Exit message
 	    System.out.println("Done!");
 	}
 	
 }
+
+//  old weka
+//BufferedReader reader = new BufferedReader( new FileReader(args[0]) );
+//Instances data = new Instances( reader );
+//reader.close();
+//  new weka
+//DataSource source = new DataSource("/some/where/data.arff");
+//Instances data = source.getDataSet();
+
+// setting class attribute
+//data.setClassIndex(data.numAttributes() - 1);
+
+// running classifiers
+//MultiLabelLearner.runClassifier(new TestClassifier(),args);
