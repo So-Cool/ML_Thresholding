@@ -68,7 +68,7 @@ For our experiment we will use the following ranking and scoring approaches:
 	\item Multi-label perceptron~\cite{Crammer03afamily}. This approach produces one perceptron per label with weight updated in such a way that each perceptron leads to perfect labels ranking. %* ?????
 	\item Ranking by pairwise comparison~\cite{Wu:2004:PEM:1005332.1016791}. This model learns pairwise binary models(for all possible pairs). Scores are obtained by accumulating votes for each label. %*
 	% \item Calibrated label ranking. %*
-	\item AdaBoost.MR~\cite{Schapire00boostexter:a}---adaptation of AdaBoost algorithm for multi-label datasets which tries to find hypothesis which places correct labels at the top of the ranking. %*
+	\item AdaBoost.MH~\cite{Schapire00boostexter:a}---adaptation of AdaBoost algorithm for multi-label datasets which tries to find hypothesis which places correct labels at the top of the ranking. %*
 	\end{itemize}
 \item Scores:
 	\begin{itemize}
