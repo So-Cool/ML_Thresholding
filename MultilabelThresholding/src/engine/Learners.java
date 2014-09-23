@@ -1,6 +1,8 @@
 package engine;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import weka.classifiers.functions.SMO;
 import weka.classifiers.functions.supportVector.PolyKernel;
@@ -19,8 +21,6 @@ import mulan.classifier.transformation.AdaBoostMH;
 import mulan.classifier.transformation.EnsembleOfClassifierChains;
 import mulan.classifier.transformation.LabelPowerset;
 import mulan.data.MultiLabelInstances;
-//import mulan.evaluation.Evaluator;
-//import mulan.evaluation.MultipleEvaluation;
 
 public class Learners {
 	
@@ -41,27 +41,49 @@ public class Learners {
 	private MultiLabelInstances dataset;
 	
 	private RAkEL learner1_1;
+	private List<double[]> confidences1_1 = new ArrayList<double[]>(); 
+	private List<int[]> scores1_1 = new ArrayList<int[]>();
 	private double result1_1;
+	
 	private RAkEL learner1_2;
+	private List<double[]> confidences1_2 = new ArrayList<double[]>(); 
+	private List<int[]> scores1_2 = new ArrayList<int[]>();
 	private double result1_2;
+	
 	private RAkEL learner1_3;
+	private List<double[]> confidences1_3 = new ArrayList<double[]>(); 
+	private List<int[]> scores1_3 = new ArrayList<int[]>();
 	private double result1_3;
 	
 	private EnsembleOfClassifierChains learner2_1;
+	private List<double[]> confidences2_1 = new ArrayList<double[]>(); 
+	private List<int[]> scores2_1 = new ArrayList<int[]>();
 	private double result2_1;
+	
 	private EnsembleOfClassifierChains learner2_2;
+	private List<double[]> confidences2_2 = new ArrayList<double[]>(); 
+	private List<int[]> scores2_2 = new ArrayList<int[]>();
 	private double result2_2;
+	
 	private EnsembleOfClassifierChains learner2_3;
+	private List<double[]> confidences2_3 = new ArrayList<double[]>(); 
+	private List<int[]> scores2_3 = new ArrayList<int[]>();
 	private double result2_3;
 	
 	private MMPLearner learner3;
+	private List<double[]> confidences3 = new ArrayList<double[]>(); 
+	private List<int[]> scores3 = new ArrayList<int[]>();
 	private double result3;
 	
 	// Ranking by pairwise comparison
 	private MMPLearner learner4;
+	private List<double[]> confidences4 = new ArrayList<double[]>(); 
+	private List<int[]> scores4 = new ArrayList<int[]>();
 	private double result4 = -1;
 	
 	private AdaBoostMH learner5;
+	private List<double[]> confidences5 = new ArrayList<double[]>(); 
+	private List<int[]> scores5 = new ArrayList<int[]>();
 	private double result5;
 	
 //	private int folds = 2;
@@ -215,7 +237,7 @@ public class Learners {
         	a = names[names.length-1];
         	SerializationHelper.write(a + "-" + name + ".model", learner4);
         }
-        
+        */
         
         System.out.println("9...");
         learner5.build(dataset);
@@ -224,7 +246,7 @@ public class Learners {
         	a = names[names.length-1];
         	SerializationHelper.write(a + "-" + name + ".model", learner5);
         }
-        */
+       
         
         System.out.println("Done...");
 	}
@@ -233,18 +255,30 @@ public class Learners {
 //		Evaluator eval = new Evaluator();
 //		MultipleEvaluation results;
 		
-		
+		System.out.println("SCORING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		//  SCORING
 		// RAkEL
 		// *rakel---k-NN
+		
 		int numInstances = test.getNumInstances();
         for ( int instanceIndex = 0; instanceIndex < numInstances; ++instanceIndex ) {
             Instance instance = test.getDataSet().instance(instanceIndex);
             MultiLabelOutput output = learner1_1.makePrediction(instance);
-            if ( output.hasBipartition() ) {
-//            	output.ranksFromValues(output.getHammingLoss())
-                String bipartion = Arrays.toString(output.getBipartition());
-                System.out.println("Predicted bipartion: " + bipartion);
+
+            
+            if ( output.hasConfidences() && output.hasRanking()) {
+            	double[] confidences = output.getConfidences();
+                System.out.println("Predicted confidences: " + Arrays.toString(confidences));
+                confidences1_1.add(confidences);
+                
+            	int[] scores = output.getRanking();
+                System.out.println("Predicted scores: " + Arrays.toString(scores));
+                scores1_1.add(scores);
+                
+//              String pvalues = Arrays.toString( output.getPvalues() );
+//              System.out.println("Predicted Pvalues: " + pvalues);
+//              String bipartion = Arrays.toString(output.getBipartition());
+//              System.out.println("Predicted bipartion: " + bipartion + "\n");
             }
         }
 		
@@ -264,31 +298,48 @@ public class Learners {
 		results = eval.crossValidate(learner2_2, dataset, folds);
 		result2_2 = results.getMean(type);
 		results = eval.crossValidate(learner2_3, dataset, folds);
-		result2_3 = results.getMean(type);
+		result2_3 = results.getMean(type);*/
 
+        System.out.println("RANKING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
+        /*
 		// Evaluation
 		//  RANKING
 		// Multi-label perceptron
-		results = eval.crossValidate(learner3, dataset, folds);
-		System.out.println(results);
-		result3 = results.getMean(type);
+//		results = eval.crossValidate(learner3, dataset, folds);
+//		System.out.println(results);
+//		result3 = results.getMean(type);
 
 		// Ranking by pairwise comparison
 		results = eval.crossValidate(learner4, dataset, folds);
 		result4 = results.getMean(type);
+		*/
+		
 		//AdaboostMH
-		results = eval.crossValidate(learner5, dataset, folds);
-		System.out.println(results);
-		result5 = results.getMean(type);*/
+//		results = eval.crossValidate(learner5, dataset, folds);
+//		System.out.println(results);
+//		result5 = results.getMean(type);
+        for ( int instanceIndex = 0; instanceIndex < numInstances; ++instanceIndex ) {
+            Instance instance = test.getDataSet().instance(instanceIndex);
+            MultiLabelOutput output = learner5.makePrediction(instance);
+            if ( output.hasConfidences() && output.hasRanking()) {
+            	double[] confidences = output.getConfidences();
+                System.out.println("Predicted confidences: " + Arrays.toString(confidences));
+                confidences5.add(confidences);
+                
+            	int[] scores = output.getRanking();
+                System.out.println("Predicted scores: " + Arrays.toString(scores));
+                scores5.add(scores);
+            }
+        }
 		
 	}
 	
 	// Thresholding
-	/*private void threshold() {
-		//lol
-		System.out.println("Does nothing.");
-	}*/
+	public void threshold() {
+		System.out.println(confidences5.toString());
+		System.out.println(scores5.toString());
+	}
 	
 	public double[] getHammingLoss(){
 		double[] res = {result1_1, result1_2, result1_3, result2_1, result2_2, result2_3, result3, result4, result5};

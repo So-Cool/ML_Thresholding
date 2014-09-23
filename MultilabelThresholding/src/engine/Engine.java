@@ -29,6 +29,7 @@ public class Engine {
     	String[] filename = args[1].split("\\.")[0].split("\\/");
     	learn.learn(filename[filename.length-1]);
     	learn.evaluate(evaluationMeasure);
+    	learn.threshold();
     	
     	// Gather HammingLoss results and print them
     	System.out.println(learn.toString());
