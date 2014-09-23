@@ -14,6 +14,9 @@ import weka.core.SelectedTag;
 import weka.core.SerializationHelper;
 import weka.core.Tag;
 import weka.core.neighboursearch.LinearNNSearch;
+import mulan.classifier.InvalidDataException;
+import mulan.classifier.ModelInitializationException;
+import mulan.classifier.MultiLabelLearnerBase;
 import mulan.classifier.MultiLabelOutput;
 import mulan.classifier.meta.RAkEL;
 import mulan.classifier.neural.MMPLearner;
@@ -165,7 +168,7 @@ public class Learners {
         	SerializationHelper.write(a + "-" + b + "-" + name + ".model", learner1_1);
         }
 		
-        /*
+        
         System.out.println("2...");
         learner1_2.build(dataset);
         if(saveModels){
@@ -237,7 +240,7 @@ public class Learners {
         	a = names[names.length-1];
         	SerializationHelper.write(a + "-" + name + ".model", learner4);
         }
-        */
+        
         
         System.out.println("9...");
         learner5.build(dataset);
@@ -259,77 +262,71 @@ public class Learners {
 		//  SCORING
 		// RAkEL
 		// *rakel---k-NN
+		eval(learner1_1, confidences1_1, scores1_1);
+//		results = eval.crossValidate(learner1_1, dataset, folds);
+//		result1_1 = results.getMean(type);
+		// *rakel---SVM
+		eval(learner1_2, confidences1_2, scores1_2);
+//		results = eval.crossValidate(learner1_2, dataset, folds);
+//		result1_2 = results.getMean(type);
+		// *rakel---J48
+		eval(learner1_3, confidences1_3, scores1_3);
+//		results = eval.crossValidate(learner1_3, dataset, folds);
+//		result1_3 = results.getMean(type);
 		
+		// Ensembles of Classifier Chains
+		eval(learner2_1, confidences2_1, scores2_1);
+//		results = eval.crossValidate(learner2_1, dataset, folds);
+//		result2_1 = results.getMean(type);
+		eval(learner2_2, confidences2_2, scores2_2);
+//		results = eval.crossValidate(learner2_2, dataset, folds);
+//		result2_2 = results.getMean(type);
+		eval(learner2_3, confidences2_3, scores2_3);
+//		results = eval.crossValidate(learner2_3, dataset, folds);
+//		result2_3 = results.getMean(type);*/
+
+        System.out.println("RANKING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
+		// Evaluation
+		//  RANKING
+		// Multi-label perceptron
+        eval(learner3, confidences3, scores3);
+//		results = eval.crossValidate(learner3, dataset, folds);
+//		result3 = results.getMean(type);
+
+		// Ranking by pairwise comparison
+        eval(learner4, confidences4, scores4);
+//		results = eval.crossValidate(learner4, dataset, folds);
+//		result4 = results.getMean(type);
+
+		
+		//AdaboostMH
+        eval(learner5, confidences5, scores5);
+//		results = eval.crossValidate(learner5, dataset, folds);
+//		System.out.println(results);
+//		result5 = results.getMean(type);
+		
+	}
+	
+	// fill scores and thresholds
+	private void eval(MultiLabelLearnerBase learner, List<double[]> confidence, List<int[]> score) throws InvalidDataException, ModelInitializationException, Exception{
 		int numInstances = test.getNumInstances();
         for ( int instanceIndex = 0; instanceIndex < numInstances; ++instanceIndex ) {
             Instance instance = test.getDataSet().instance(instanceIndex);
-            MultiLabelOutput output = learner1_1.makePrediction(instance);
-
-            
+            MultiLabelOutput output = learner.makePrediction(instance);
             if ( output.hasConfidences() && output.hasRanking()) {
             	double[] confidences = output.getConfidences();
                 System.out.println("Predicted confidences: " + Arrays.toString(confidences));
-                confidences1_1.add(confidences);
+                confidence.add(confidences);
                 
             	int[] scores = output.getRanking();
-                System.out.println("Predicted scores: " + Arrays.toString(scores));
-                scores1_1.add(scores);
+                System.out.println("Predicted scores: " + Arrays.toString(scores)+"\n");
+                score.add(scores);
                 
 //              String pvalues = Arrays.toString( output.getPvalues() );
 //              System.out.println("Predicted Pvalues: " + pvalues);
 //              String bipartion = Arrays.toString(output.getBipartition());
 //              System.out.println("Predicted bipartion: " + bipartion + "\n");
-            }
-        }
-		
-		/*
-		results = eval.crossValidate(learner1_1, dataset, folds);
-		result1_1 = results.getMean(type);
-		// *rakel---SVM
-		results = eval.crossValidate(learner1_2, dataset, folds);
-		result1_2 = results.getMean(type);
-		// *rakel---J48
-		results = eval.crossValidate(learner1_3, dataset, folds);
-		result1_3 = results.getMean(type);
-		
-		// Ensembles of Classifier Chains
-		results = eval.crossValidate(learner2_1, dataset, folds);
-		result2_1 = results.getMean(type);
-		results = eval.crossValidate(learner2_2, dataset, folds);
-		result2_2 = results.getMean(type);
-		results = eval.crossValidate(learner2_3, dataset, folds);
-		result2_3 = results.getMean(type);*/
-
-        System.out.println("RANKING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-
-        /*
-		// Evaluation
-		//  RANKING
-		// Multi-label perceptron
-//		results = eval.crossValidate(learner3, dataset, folds);
-//		System.out.println(results);
-//		result3 = results.getMean(type);
-
-		// Ranking by pairwise comparison
-		results = eval.crossValidate(learner4, dataset, folds);
-		result4 = results.getMean(type);
-		*/
-		
-		//AdaboostMH
-//		results = eval.crossValidate(learner5, dataset, folds);
-//		System.out.println(results);
-//		result5 = results.getMean(type);
-        for ( int instanceIndex = 0; instanceIndex < numInstances; ++instanceIndex ) {
-            Instance instance = test.getDataSet().instance(instanceIndex);
-            MultiLabelOutput output = learner5.makePrediction(instance);
-            if ( output.hasConfidences() && output.hasRanking()) {
-            	double[] confidences = output.getConfidences();
-                System.out.println("Predicted confidences: " + Arrays.toString(confidences));
-                confidences5.add(confidences);
-                
-            	int[] scores = output.getRanking();
-                System.out.println("Predicted scores: " + Arrays.toString(scores));
-                scores5.add(scores);
             }
         }
 		
