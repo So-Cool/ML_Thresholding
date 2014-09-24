@@ -1,5 +1,7 @@
 package engine;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -78,7 +80,7 @@ public class Learners {
 	private List<int[]> scores3 = new ArrayList<int[]>();
 	private double result3;
 	
-	// Ranking by pairwise comparison
+	// Ranking by pairwise comparison!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	private MMPLearner learner4;
 	private List<double[]> confidences4 = new ArrayList<double[]>(); 
 	private List<int[]> scores4 = new ArrayList<int[]>();
@@ -260,47 +262,49 @@ public class Learners {
 		
 		System.out.println("SCORING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		//  SCORING
-		// RAkEL
-		// *rakel---k-NN
+		System.out.println("RAkEL");
+		System.out.println("rakel---k-NN");
 		eval(learner1_1, confidences1_1, scores1_1);
 //		results = eval.crossValidate(learner1_1, dataset, folds);
 //		result1_1 = results.getMean(type);
-		// *rakel---SVM
+		System.out.println("rakel---SVM");
 		eval(learner1_2, confidences1_2, scores1_2);
 //		results = eval.crossValidate(learner1_2, dataset, folds);
 //		result1_2 = results.getMean(type);
-		// *rakel---J48
+		System.out.println("rakel---J48");
 		eval(learner1_3, confidences1_3, scores1_3);
 //		results = eval.crossValidate(learner1_3, dataset, folds);
 //		result1_3 = results.getMean(type);
 		
-		// Ensembles of Classifier Chains
+		System.out.println("Ensembles of Classifier Chains");
+		System.out.println("EoCC---k-NN");
 		eval(learner2_1, confidences2_1, scores2_1);
 //		results = eval.crossValidate(learner2_1, dataset, folds);
 //		result2_1 = results.getMean(type);
+		System.out.println("EoCC---SVM");
 		eval(learner2_2, confidences2_2, scores2_2);
 //		results = eval.crossValidate(learner2_2, dataset, folds);
 //		result2_2 = results.getMean(type);
+		System.out.println("EoCC---J48");
 		eval(learner2_3, confidences2_3, scores2_3);
 //		results = eval.crossValidate(learner2_3, dataset, folds);
 //		result2_3 = results.getMean(type);*/
 
         System.out.println("RANKING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
-		// Evaluation
 		//  RANKING
-		// Multi-label perceptron
+        System.out.println("Multi-label perceptron");
         eval(learner3, confidences3, scores3);
 //		results = eval.crossValidate(learner3, dataset, folds);
 //		result3 = results.getMean(type);
 
-		// Ranking by pairwise comparison
+        System.out.println("Ranking by pairwise comparison");
         eval(learner4, confidences4, scores4);
 //		results = eval.crossValidate(learner4, dataset, folds);
 //		result4 = results.getMean(type);
 
 		
-		//AdaboostMH
+        System.out.println("AdaboostMH");
         eval(learner5, confidences5, scores5);
 //		results = eval.crossValidate(learner5, dataset, folds);
 //		System.out.println(results);
@@ -332,8 +336,41 @@ public class Learners {
 		
 	}
 	
+
+	// Write prediction to CSV for threshold classification
+	public void writeToCSV(String fileName) throws IOException{
+		FileWriter writer = new FileWriter(fileName + ".csv");
+		writer.flush();
+		writer.close();
+		
+	}
+	
 	// Thresholding
 	public void threshold() {
+		System.out.println(confidences1_1.toString());
+		System.out.println(scores1_1.toString());
+		
+		System.out.println(confidences1_2.toString());
+		System.out.println(scores1_2.toString());
+		
+		System.out.println(confidences1_3.toString());
+		System.out.println(scores1_3.toString());
+		
+		System.out.println(confidences2_1.toString());
+		System.out.println(scores2_1.toString());
+		
+		System.out.println(confidences2_2.toString());
+		System.out.println(scores2_2.toString());
+		
+		System.out.println(confidences2_3.toString());
+		System.out.println(scores2_3.toString());
+		
+		System.out.println(confidences3.toString());
+		System.out.println(scores3.toString());
+		
+		System.out.println(confidences4.toString());
+		System.out.println(scores4.toString());
+		
 		System.out.println(confidences5.toString());
 		System.out.println(scores5.toString());
 	}

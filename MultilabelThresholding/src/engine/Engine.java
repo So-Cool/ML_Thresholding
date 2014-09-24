@@ -24,6 +24,13 @@ public class Engine {
     	System.out.println("Reading test dataset...");
         MultiLabelInstances test = new MultiLabelInstances(args[2], args[1]);
     	
+        Thresholders thr = new Thresholders(training);
+        thr.getLabelCount();
+        thr.alterDataset();
+        if( training.equals(thr.getTrain()) )
+        	System.out.println( "They are equal" );
+        System.exit(0);
+        
     	// use data-set with *CVfolds*-folds cross-validation
     	Learners learn = new Learners(training, test, saveModels);
     	String[] filename = args[1].split("\\.")[0].split("\\/");
