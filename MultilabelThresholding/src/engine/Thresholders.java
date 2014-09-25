@@ -15,6 +15,7 @@ public class Thresholders {
 	
 	private MultiLabelInstances train;
 	private Instances thrSet;
+	private Instances thrSetLiteral;
 	private List<Integer> labels = new ArrayList<Integer>();
 	
 	// labels bounds
@@ -53,10 +54,22 @@ public class Thresholders {
 		for (int i = bound1-1; i > bound0-1; --i)
 			singleLables.deleteAttributeAt(i);
 		
+		// get a copy for text attribute
+		Instances thrSetLiteral = new Instances(singleLables);
+		
+		// get nominal counter
+		List<String> values = new ArrayList<String>();
+		for( int i = 0; i < 100; ++i ) {
+			values.add( String.valueOf(i) );
+		}
+		
 		// add target attribute
 		singleLables.insertAttributeAt(new Attribute("NumberOfLabels"), singleLables.numAttributes());
+		thrSetLiteral.insertAttributeAt(new Attribute("NumberOfLabels", values), thrSetLiteral.numAttributes());
+		
 		if (singleLables.numInstances() == labels.size()){
 			for (int i = 0; i < labels.size(); ++i) {
+				thrSetLiteral.instance(i).setValue(thrSetLiteral.numAttributes() - 1, labels.get(i));
 				singleLables.instance(i).setValue(singleLables.numAttributes() - 1, labels.get(i));
 			}
 		} else {
@@ -65,8 +78,10 @@ public class Thresholders {
 		}
 		
 		singleLables.setClassIndex(singleLables.numAttributes() - 1);
+		thrSetLiteral.setClassIndex(thrSetLiteral.numAttributes() - 1);
 		
 		this.thrSet = singleLables;
+		this.thrSetLiteral = thrSetLiteral;
 		
 		/*
 		// Save the file for view
@@ -79,7 +94,11 @@ public class Thresholders {
 	}
 	
 	public void trainThresholders() {
-		//return
+		// train models for thresholding
+		
+		// regression
+		
+		// multi-class classification
 	}
 	
 	public List<Integer> getLabels() { return labels; }

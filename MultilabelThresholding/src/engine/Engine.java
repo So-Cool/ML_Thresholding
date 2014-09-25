@@ -1,6 +1,11 @@
 package engine;
 
 import mulan.data.MultiLabelInstances;
+/*
+ * To-Do
+ * split TEST/TRAINING: CAL500 dataset
+ * fix the 4th multilabel classifer: RANKING BY PAIRWISE COMPARISON 
+ */
 
 public class Engine {
 	
