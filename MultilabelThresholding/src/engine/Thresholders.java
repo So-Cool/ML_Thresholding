@@ -10,6 +10,7 @@ import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.converters.ArffSaver;
+import weka.filters.unsupervised.attribute.Add;
 
 public class Thresholders {
 	
@@ -51,13 +52,20 @@ public class Thresholders {
 		Instances singleLables = train.getDataSet();
 		
 		// remove labels
-		for (int i = bound0; i < bound1; ++i)
+		for (int i = bound1-1; i > bound0-1; --i)
 			singleLables.deleteAttributeAt(i);
 		
 		// add target attribute
-		Attribute attr = new Attribute("NumberOfLabels", labelsS);
-		
-		singleLables.insertAttributeAt(attr, singleLables.numAttributes());
+		singleLables.insertAttributeAt(new Attribute("NumberOfLabels"), singleLables.numAttributes());
+		if (singleLables.numInstances() == labelsS.size()){
+			for (int i = 0; i < labelsS.size(); ++i) {
+				singleLables.instance(i).setValue(singleLables.numAttributes() - 1, labels.get(i));
+			}
+		} else {
+			System.err.println(" incorrect number of elements!");
+			System.exit(1);
+		}
+		/*
 		
 		singleLables.setClassIndex(singleLables.numAttributes() - 1);
 		
@@ -66,7 +74,7 @@ public class Thresholders {
 		saver.setInstances(singleLables);
 		saver.setFile(new File("./test.arff"));
 //		saver.setDestination(new File(".test.arff"));   // **not** necessary in 3.5.4 and later
-		saver.writeBatch();
+		saver.writeBatch();*/
 	}
 	
 	public List<Integer> getLabels() { return labels; }
