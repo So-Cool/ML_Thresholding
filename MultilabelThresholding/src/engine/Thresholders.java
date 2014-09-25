@@ -1,6 +1,6 @@
 package engine;
 
-import java.io.File;
+//import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,14 +9,13 @@ import mulan.data.MultiLabelInstances;
 import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.converters.ArffSaver;
-import weka.filters.unsupervised.attribute.Add;
+//import weka.core.converters.ArffSaver;
 
 public class Thresholders {
 	
 	private MultiLabelInstances train;
+	private Instances thrSet;
 	private List<Integer> labels = new ArrayList<Integer>();
-	private List<String> labelsS = new ArrayList<String>();
 	
 	// labels bounds
 	private int bound0;
@@ -36,7 +35,6 @@ public class Thresholders {
             Instance instance = train.getDataSet().instance(instanceIndex);
             int ones = onesCount(instance, classes0, classes1);
             labels.add( ones );
-            labelsS.add(String.valueOf(ones));
         }
 	}
 	
@@ -57,27 +55,35 @@ public class Thresholders {
 		
 		// add target attribute
 		singleLables.insertAttributeAt(new Attribute("NumberOfLabels"), singleLables.numAttributes());
-		if (singleLables.numInstances() == labelsS.size()){
-			for (int i = 0; i < labelsS.size(); ++i) {
+		if (singleLables.numInstances() == labels.size()){
+			for (int i = 0; i < labels.size(); ++i) {
 				singleLables.instance(i).setValue(singleLables.numAttributes() - 1, labels.get(i));
 			}
 		} else {
 			System.err.println(" incorrect number of elements!");
 			System.exit(1);
 		}
-		/*
 		
 		singleLables.setClassIndex(singleLables.numAttributes() - 1);
 		
+		this.thrSet = singleLables;
+		
+		/*
 		// Save the file for view
 		ArffSaver saver = new ArffSaver();
 		saver.setInstances(singleLables);
 		saver.setFile(new File("./test.arff"));
 //		saver.setDestination(new File(".test.arff"));   // **not** necessary in 3.5.4 and later
-		saver.writeBatch();*/
+		saver.writeBatch();
+		*/
+	}
+	
+	public void trainThresholders() {
+		//return
 	}
 	
 	public List<Integer> getLabels() { return labels; }
 	public MultiLabelInstances getTrain() { return train; }
+	public Instances getThrSet() { return thrSet; }
 	
 }
