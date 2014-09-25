@@ -1,6 +1,6 @@
 package engine;
 
-//import java.io.File;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import mulan.data.MultiLabelInstances;
 import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;
-//import weka.core.converters.ArffSaver;
+import weka.core.converters.ArffSaver;
 
 public class Thresholders {
 	
@@ -83,14 +83,14 @@ public class Thresholders {
 		this.thrSet = singleLables;
 		this.thrSetLiteral = thrSetLiteral;
 		
-		/*
+//		/*
 		// Save the file for view
 		ArffSaver saver = new ArffSaver();
 		saver.setInstances(singleLables);
 		saver.setFile(new File("./test.arff"));
 //		saver.setDestination(new File(".test.arff"));   // **not** necessary in 3.5.4 and later
 		saver.writeBatch();
-		*/
+//		*/
 	}
 	
 	public void trainThresholders() {
